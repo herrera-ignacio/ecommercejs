@@ -2,15 +2,12 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
-const Product = require('./entities/product/model')
+const { getProducts, createProduct } = require('./entities/product/controllers')
+const { createUser } = require('./entities/user/controllers')
 
 const app = express();
 
 app.use(bodyParser.json())
-
-app.get('/', (req, res) => {
-	res.send('Hello world')
-});
 
 app.use('/graphql', graphqlHTTP({
 	schema: buildSchema(`
@@ -21,6 +18,12 @@ app.use('/graphql', graphqlHTTP({
 			price: Float!
 			creationDate: String!
 		}
+
+		type User {
+			_id: ID!
+			email: String!
+			password: String
+		}
 		
 		input ProductInput {
 			title: String!
@@ -29,12 +32,18 @@ app.use('/graphql', graphqlHTTP({
 			creationDate: String!
 		}
 
+		input UserInput {
+			email: String!
+			password: String
+		}
+
 		type RootQuery {
 			products: [Product!]!
 		}
 
 		type RootMutation {
 			createProduct(productInput: ProductInput): Product
+			createUser(userInput: UserInput): User
 		}
 
 		schema {
@@ -43,19 +52,9 @@ app.use('/graphql', graphqlHTTP({
 		}
 	`),
 	rootValue: {
-		products: async () => Product.find(),
-		createProduct: (args) => {
-			const { title, description, price, creationDate } = args.productInput
-			const product = new Product({
-				title,
-				description,
-				price: +price,
-				creationDate: new Date(creationDate)
-			})
-			return product.save()
-				.then(res => { console.log(res); return { ...res._doc } })
-				.catch(err => console.log(err))
-		}
+		products: getProducts,
+		createProduct,
+		createUser
 	},
 	graphiql: true
 }))

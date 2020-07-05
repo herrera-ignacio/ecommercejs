@@ -32,3 +32,22 @@ query {
   }
 }
 ```
+
+## Users
+
+### Create Users
+
+```graphql
+mutation {
+  createUser(
+    userInput: {
+      email: "test@example.com",
+      password:"test"
+    }
+  ) {
+    _id
+    email
+    password
+  } 
+}
+```
