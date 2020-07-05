@@ -1,8 +1,4 @@
-const mongoose = require('mongoose')
-const { schema } = require('./schema')
+const { Schema, model } = require('mongoose')
+const { ProductSchema } = require('./schema')
 
-const Schema = mongoose.Schema;
-
-const productSchema = new Schema(schema)
-
-module.exports = mongoose.model('Product', productSchema)
+module.exports = model('Product', new Schema(ProductSchema))

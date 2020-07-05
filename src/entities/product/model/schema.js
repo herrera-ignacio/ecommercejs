@@ -1,4 +1,4 @@
-const schema = {
+const ProductSchema = {
 	title: {
 		type: String,
 		required: true
@@ -17,4 +17,4 @@ const schema = {
 	}
 }
 
-module.exports = { schema }
+module.exports = { ProductSchema }

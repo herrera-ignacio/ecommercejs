@@ -2,7 +2,6 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
-const mongoose = require('mongoose')
 const Product = require('./entities/product/model')
 
 const app = express();
@@ -60,20 +59,5 @@ app.use('/graphql', graphqlHTTP({
 	},
 	graphiql: true
 }))
-
-const cluster = process.env.MONGO_CLUSTER
-const dbName = process.env.MONGO_DBNAME
-const mongoUrl = `mongodb+srv://@${cluster}/${dbName}?retryWrites=true&w=majority`
-const mongoConfig = {
-	user: process.env.MONGO_USER,
-	pass: process.env.MONGO_PASSWORD,
-	retryWrites: true,
-	useNewUrlParser: true,
-	useUnifiedTopology: true
-}
-console.log(mongoUrl)
-mongoose.connect(mongoUrl, mongoConfig)
-	.then(() => console.log('mongo connected'))
-	.catch((err) => console.log(err))
 
 module.exports = { app }

@@ -1,9 +1,18 @@
+
 const { env } = require('./load-env')
 const { app } = require('./src/app')
+const { connectToDatabase } = require('./src/frameworks/mongodb')
 
-//== Environment ==//
-console.log('Loaded environment:', env)
+//== Start Server ==//
+void (async () => {
+	//== Environment ==//
+	console.log('Loaded environment:', env)
 
-//== Start listening ==//
-const port = process.env.PORT
-app.listen(port, () => console.log(`Server listening on port ${port}`))
+	//== Connect to database ==//
+	await connectToDatabase()
+
+	//== Start listening ==//
+	const port = process.env.PORT
+	app.listen(port, () => console.log(`Server listening on port ${port}`))
+})()
+
