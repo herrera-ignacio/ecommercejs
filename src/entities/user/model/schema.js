@@ -6,13 +6,7 @@ const UserSchema = (types) => ({
 	password: {
 		type: String,
 		required: true
-	},
-	wishlistProducts: [
-		{
-			type: types.ObjectId,
-			ref: 'Product'
-		}
-	]
+	}
 })
 
 module.exports = { UserSchema }
