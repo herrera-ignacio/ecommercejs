@@ -11,14 +11,31 @@ app.get('/', (req, res) => {
 	res.send('Hello world')
 });
 
+const products = []
+
 app.use('/graphql', graphqlHTTP({
 	schema: buildSchema(`
+		type Product {
+			_id: ID!
+			title: String!
+			description: String!
+			price: Float!
+			creationDate: String!
+		}
+		
+		input ProductInput {
+			title: String!
+			description: String!
+			price: Float!
+			creationDate: String!
+		}
+
 		type RootQuery {
-			events: [String!]!
+			products: [Product!]!
 		}
 
 		type RootMutation {
-			createEvent(name: String): String
+			createProduct(productInput: ProductInput): Product
 		}
 
 		schema {
@@ -27,10 +44,18 @@ app.use('/graphql', graphqlHTTP({
 		}
 	`),
 	rootValue: {
-		events: () => ['Romantic', 'Cooking', 'Sailing'],
-		createEvent: (args) => {
-			const eventName = args.name
-			return eventName
+		products: () => products,
+		createProduct: (args) => {
+			const { title, description, price, creationDate } = args.productInput
+			const product = {
+				_id: Math.random().toString(),
+				title,
+				description,
+				price,
+				creationDate
+			}
+			products.push(product)
+			return product
 		}
 	},
 	graphiql: true
