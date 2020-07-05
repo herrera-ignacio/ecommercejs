@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const { graphqlHTTP } = require('express-graphql')
 const { buildSchema } = require('graphql')
 const mongoose = require('mongoose')
+const Product = require('./entities/product/model')
 
 const app = express();
 
@@ -11,8 +12,6 @@ app.use(bodyParser.json())
 app.get('/', (req, res) => {
 	res.send('Hello world')
 });
-
-const products = []
 
 app.use('/graphql', graphqlHTTP({
 	schema: buildSchema(`
@@ -45,18 +44,18 @@ app.use('/graphql', graphqlHTTP({
 		}
 	`),
 	rootValue: {
-		products: () => products,
+		products: async () => Product.find(),
 		createProduct: (args) => {
 			const { title, description, price, creationDate } = args.productInput
-			const product = {
-				_id: Math.random().toString(),
+			const product = new Product({
 				title,
 				description,
-				price,
-				creationDate
-			}
-			products.push(product)
-			return product
+				price: +price,
+				creationDate: new Date(creationDate)
+			})
+			return product.save()
+				.then(res => { console.log(res); return { ...res._doc } })
+				.catch(err => console.log(err))
 		}
 	},
 	graphiql: true

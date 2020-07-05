@@ -13,7 +13,7 @@ mutation {
       title: "test",
       description: "test description",
       price: 12.00,
-      creationDate: "today" 
+      creationDate: "2020-07-05T15:46:53.207Z" 
     }
   ) {
     title
