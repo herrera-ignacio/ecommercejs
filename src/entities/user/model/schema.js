@@ -1,4 +1,4 @@
-const UserSchema = (types) => ({
+const UserSchema = {
 	email: {
 		type: String,
 		required: true
@@ -7,6 +7,6 @@ const UserSchema = (types) => ({
 		type: String,
 		required: true
 	}
-})
+}
 
 module.exports = { UserSchema }
