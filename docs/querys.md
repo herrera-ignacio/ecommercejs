@@ -13,11 +13,15 @@ mutation {
       title: "test",
       description: "test description",
       price: 12.00,
-      creationDate: "2020-07-05T15:46:53.207Z" 
+      creationDate: "2020-07-05T15:46:53.207Z",
+      category: "5f07c38ec0a2e56062f6e72f"
     }
   ) {
     title
   	description
+   	category {
+      title
+    }
   } 
 }
 ```

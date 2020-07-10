@@ -4,6 +4,7 @@ const Product = `type Product {
 	description: String!
 	price: Float!
 	creationDate: String!
+	category: Category!
 }`
 
 const ProductInput = `input ProductInput {
@@ -11,6 +12,7 @@ const ProductInput = `input ProductInput {
 	description: String!
 	price: Float!
 	creationDate: String!
+	categoryId: String!
 }`
 
 const ProductQueries = `products: [Product!]!`
