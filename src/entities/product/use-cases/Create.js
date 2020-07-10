@@ -6,8 +6,8 @@ const { CategoryAddProduct } = require('../../category/use-cases/Update')
  * add relationship to Category
  * @param {*} param0 
  */
-const ProductCreate = async ({ title, description, price, creationDate, categoryId }) => {
-	const product = await createProduct({ title, description, price, creationDate, categoryId })
+const ProductCreate = async ({ title, description, price, categoryId }) => {
+	const product = await createProduct({ title, description, price, categoryId })
 	await CategoryAddProduct(categoryId, product._id)
 	return product
 }

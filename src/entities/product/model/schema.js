@@ -11,7 +11,7 @@ const ProductSchema = (types) => ({
 		type: Number,
 		required: true
 	},
-	creationDate: {
+	createdAt: {
 		type: Date,
 		required: true
 	},

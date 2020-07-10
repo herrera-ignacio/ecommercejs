@@ -10,16 +10,18 @@ List of available querys with examples.
 mutation {
   createProduct(
     productInput: {
-      title: "test",
-      description: "test description",
-      price: 12.00,
-      creationDate: "2020-07-05T15:46:53.207Z",
-      category: "5f07c38ec0a2e56062f6e72f"
+      title: "myProduct"
+      description: "test product desc"
+      price: 11.00
+      categoryId: "5f08a8850b85d76a960c49be"
     }
   ) {
+    _id
     title
   	description
+    createdAt
    	category {
+      _id
       title
     }
   } 
@@ -33,6 +35,13 @@ query {
   products {
     _id
     title
+    description
+    createdAt
+    category {
+      _id
+      title
+      description
+    }
   }
 }
 ```

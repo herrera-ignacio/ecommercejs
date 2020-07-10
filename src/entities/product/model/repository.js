@@ -3,12 +3,12 @@ const { Product } = require('./index')
 /**
  * Save new product to database
  */
-const createProduct = async ({ title, description, price, creationDate, categoryId }) => {
+const createProduct = async ({ title, description, price, categoryId }) => {
 	const product = new Product({
 		title,
 		description,
 		price: +price,
-		creationDate: new Date(creationDate),
+		createdAt: new Date(),
 		category: categoryId
 	})
 

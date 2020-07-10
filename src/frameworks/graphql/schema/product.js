@@ -3,7 +3,7 @@ const Product = `type Product {
 	title: String!
 	description: String!
 	price: Float!
-	creationDate: String!
+	createdAt: String!
 	category: Category!
 }`
 
@@ -11,7 +11,6 @@ const ProductInput = `input ProductInput {
 	title: String!
 	description: String!
 	price: Float!
-	creationDate: String!
 	categoryId: String!
 }`
 
