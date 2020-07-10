@@ -51,3 +51,31 @@ mutation {
   } 
 }
 ```
+
+## Categories
+
+### Create Category
+
+```graphql
+mutation {
+  createCategory(categoryInput:{
+    title: "test"
+    description:"test description"
+  }) {
+    title
+    description
+  }
+}
+```
+
+### Get Categories
+
+```graphql
+query {
+  categories {
+    _id
+    title
+    description
+  }
+}
+```

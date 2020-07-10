@@ -1,4 +1,4 @@
-const ProductSchema = {
+const ProductSchema = (types) => ({
 	title: {
 		type: String,
 		required: true
@@ -14,7 +14,11 @@ const ProductSchema = {
 	creationDate: {
 		type: Date,
 		required: true
+	},
+	category: {
+		type: types.ObjectId,
+		ref: 'Category'
 	}
-}
+})
 
 module.exports = { ProductSchema }

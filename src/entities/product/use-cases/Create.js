@@ -1,6 +1,6 @@
 const { Product } = require('../model')
 
-const ProductCreate = (title, description, price, creationDate) => {
+const ProductCreate = ({ title, description, price, creationDate }) => {
 	const product = new Product({
 		title,
 		description,

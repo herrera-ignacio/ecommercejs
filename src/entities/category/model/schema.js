@@ -1,4 +1,4 @@
-const CategoriesSchema = (types) => ({
+const CategorySchema = (types) => ({
 	title: {
 		type: String,
 		required: true
@@ -15,4 +15,4 @@ const CategoriesSchema = (types) => ({
 	]
 })
 
-module.exports = { ProductSchema }
+module.exports = { CategorySchema }
