@@ -1,16 +1,21 @@
 const { buildSchema } = require('graphql')
-const { schemas } = require('./schemas')
+const { Product, ProductInput, ProductQueries, ProductMutations } = require('./product')
+const { User, UserInput, UserMutations } = require('./user')
 
 module.exports = buildSchema(`
-	${schemas}
+	${Product}
+	${User}
+
+	${ProductInput}
+	${UserInput}
 
 	type RootQuery {
-		products: [Product!]!
+		${ProductQueries}
 	}
 
 	type RootMutation {
-		createProduct(productInput: ProductInput): Product
-		createUser(userInput: UserInput): User
+		${ProductMutations}
+		${UserMutations}
 	}
 
 	schema {
