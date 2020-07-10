@@ -1,11 +1,5 @@
-const { Category } = require('../model')
+const { createCategory } = require('../model/repository')
 
-const CategoryCreate = ({ title, description }) => {
-	const category = new Category({
-		title,
-		description
-	})
-	return category.save()
-}
+const CategoryCreate = ({ title, description }) => createCategory({ title, description })
 
 module.exports = { CategoryCreate }
