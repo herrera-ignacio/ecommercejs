@@ -1,5 +1,4 @@
 const { Category } = require('../model')
-const { ProductList } = require('../../product/use-cases/List')
 
 const CategoryList = async (ids) => {
 	const query = {}

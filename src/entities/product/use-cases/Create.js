@@ -1,5 +1,5 @@
-const { Product } = require('../model')
-const { CategoryFromId } = require('../../category/use-cases/List')
+const { createProduct } = require('../model/repository')
+const { CategoryAddProduct } = require('../../category/use-cases/Update')
 
 /**
  * Create and save Product to database,
@@ -7,18 +7,9 @@ const { CategoryFromId } = require('../../category/use-cases/List')
  * @param {*} param0 
  */
 const ProductCreate = async ({ title, description, price, creationDate, categoryId }) => {
-	const product = new Product({
-		title,
-		description,
-		price: +price,
-		creationDate: new Date(creationDate),
-		category: categoryId
-	})
-	const savedProduct = await product.save()
-	const category = await CategoryFromId(categoryId)
-	category.products.push(savedProduct._id)
-	await category.save()
-	return savedProduct
+	const product = await createProduct({ title, description, price, creationDate, categoryId })
+	await CategoryAddProduct(categoryId, product._id)
+	return product
 }
 
 module.exports = { ProductCreate }
