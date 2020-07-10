@@ -11,5 +11,5 @@ npm run dev
 
 ## TODO
 
-* Create Categories model
-* Create dynamic relationship between Categories and Products
+* Add Products ids on creation to Categories
+* Add required populate methods on Categories to list products

@@ -1,12 +1,10 @@
 const { CategoryCreate } = require('../use-cases/Create')
 const { CategoryList } = require('../use-cases/List')
+const { categoriesWithProducts } = require('../controllers/populate')
 
 const CategoryController = {
-	getCategories: async () => CategoryList(),
-	createCategory: async ({ categoryInput }) => {
-		const category = await CategoryCreate(categoryInput)
-		return { ...category._doc }
-	}
+	getCategories: async () => categoriesWithProducts(await CategoryList()),
+	createCategory: async ({ categoryInput }) => CategoryCreate(categoryInput)
 }
 
 module.exports = CategoryController
